@@ -11,90 +11,95 @@ app.use(bodyParser.json());
 
 const apiRouter = express.Router();
 
+// Helper function to handle async errors
+const asyncHandler = fn => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
+
 app.get("/my-route", (req, res) => {
-    res.send("Hi friend");
-  });
+  res.send("Hi friend");
+});
 
-app.get("/", async (req, res) => {
-    try {
-      res.json({ message: 'API is working!' });  
-    } catch (error) {
-      res.status(500).json({ error: 'Server error' });
-    }
-  });
+app.get("/", asyncHandler(async (req, res) => {
+  res.json({ message: 'API is working!' });
+}));
 
 
-// Route for future meals
 app.get('/future-meals', async (req, res) => {
   try {
-    const meals = await knex.raw("SELECT * FROM Meal WHERE `when` > NOW()");
-    res.json(meals[0]);  // Return array of meals
+    const meals = await knex('Meal').where('when', '>', knex.fn.now());
+    res.json(meals);  // No need for [0] as in raw SQL
   } catch (error) {
     res.status(500).json({ error: 'Server error while fetching future meals.' });
   }
 });
 
+
 // Route for past meals
 app.get('/past-meals', async (req, res) => {
   try {
-    const meals = await knex.raw("SELECT * FROM Meal WHERE `when` < NOW()");
-    res.json(meals[0]);  // Return array of meals
+    const meals = await knex('Meal').where('when', '<', knex.fn.now());
+    res.json(meals);
   } catch (error) {
     res.status(500).json({ error: 'Server error while fetching past meals.' });
   }
 });
 
-// Route for all meals, sorted by ID
+
+// Route for all meals
 app.get('/all-meals', async (req, res) => {
   try {
-    const meals = await knex.raw("SELECT * FROM Meal ORDER BY id");
-    res.json(meals[0]);  // Return array of meals
+    const meals = await knex('Meal').orderBy('id');
+    res.json(meals);
   } catch (error) {
     res.status(500).json({ error: 'Server error while fetching all meals.' });
   }
 });
 
-// Route for the first meal (by minimum ID)
+
+// Route for the first meal
 app.get('/first-meal', async (req, res) => {
   try {
-    const meals = await knex.raw("SELECT * FROM Meal ORDER BY id ASC LIMIT 1");
-    if (meals[0].length === 0) {
+    const meal = await knex('Meal').orderBy('id', 'asc').first();  // "first()" returns a single object
+    if (!meal) {
       res.status(404).json({ error: 'No meals available.' });
     } else {
-      res.json(meals[0][0]);  // Return the first meal
+      res.json(meal);
     }
   } catch (error) {
     res.status(500).json({ error: 'Server error while fetching the first meal.' });
   }
 });
 
-// Route for the last meal (by maximum ID)
+
+// Route for the last meal
 app.get('/last-meal', async (req, res) => {
   try {
-    const meals = await knex.raw("SELECT * FROM Meal ORDER BY id DESC LIMIT 1");
-    if (meals[0].length === 0) {
+    const meal = await knex('Meal').orderBy('id', 'desc').first();  // Same as above, "first()" fetches the first result in the ordered set
+    if (!meal) {
       res.status(404).json({ error: 'No meals available.' });
     } else {
-      res.json(meals[0][0]);  // Return the last meal
+      res.json(meal);
     }
   } catch (error) {
     res.status(500).json({ error: 'Server error while fetching the last meal.' });
   }
 });
 
-// Example of a nested router (can be replaced with your own sub-router)
+
+// Example of a nested router 
 app.use("/nested", nestedRouter);
 
 // Use routes with /api prefix
 app.use("/api", apiRouter);
 
+// Error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Server error' });
+});
+
 // Start server on port from .env file or default to 3000
 app.listen(process.env.PORT, () => {
   console.log(`API listening on port ${process.env.PORT}`);
 });
-
-
-
-
-
-
