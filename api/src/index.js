@@ -1,9 +1,12 @@
+
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
-import knex from "./database_client.js";
+import bodyParser from "body-parser"; 
+import knex from "./database_client.js"; 
 import nestedRouter from "./routers/nested.js";
+import mealsRouter from "./routers/meals.js"; 
+import reservationsRouter from "./routers/reservations.js"; 
 
 const app = express();
 app.use(cors());
@@ -24,7 +27,6 @@ app.get("/", asyncHandler(async (req, res) => {
   res.json({ message: 'API is working!' });
 }));
 
-
 app.get('/future-meals', async (req, res) => {
   try {
     const meals = await knex('Meal').where('when', '>', knex.fn.now());
@@ -34,8 +36,6 @@ app.get('/future-meals', async (req, res) => {
   }
 });
 
-
-// Route for past meals
 app.get('/past-meals', async (req, res) => {
   try {
     const meals = await knex('Meal').where('when', '<', knex.fn.now());
@@ -44,7 +44,6 @@ app.get('/past-meals', async (req, res) => {
     res.status(500).json({ error: 'Server error while fetching past meals.' });
   }
 });
-
 
 // Route for all meals
 app.get('/all-meals', async (req, res) => {
@@ -56,8 +55,6 @@ app.get('/all-meals', async (req, res) => {
   }
 });
 
-
-// Route for the first meal
 app.get('/first-meal', async (req, res) => {
   try {
     const meal = await knex('Meal').orderBy('id', 'asc').first();  // "first()" returns a single object
@@ -71,8 +68,6 @@ app.get('/first-meal', async (req, res) => {
   }
 });
 
-
-// Route for the last meal
 app.get('/last-meal', async (req, res) => {
   try {
     const meal = await knex('Meal').orderBy('id', 'desc').first();  // Same as above, "first()" fetches the first result in the ordered set
@@ -87,11 +82,10 @@ app.get('/last-meal', async (req, res) => {
 });
 
 
-// Example of a nested router 
 app.use("/nested", nestedRouter);
 
-// Use routes with /api prefix
-app.use("/api", apiRouter);
+app.use("/api/meals", mealsRouter);
+app.use("/api/reservations", reservationsRouter);
 
 // Error handler
 app.use((err, req, res, next) => {
