@@ -5,7 +5,7 @@ const mealsRouter = express.Router();
 
 mealsRouter.get("/", async (req, res, next) => {
   try {
-    const { maxPrice, title, dateAfter, dateBefore, limit, availableReservations} =
+    const { maxPrice, title, dateAfter, dateBefore, limit, sortKey, sortDir,availableReservations } =
       req.query;
     const query = knex("Meal");
     if (maxPrice !== undefined) {
@@ -42,7 +42,33 @@ mealsRouter.get("/", async (req, res, next) => {
         query.limit(limitValue);
       }
     }
-   
+
+    if (sortKey !== undefined) {
+      query.orderBy(sortKey);
+    }
+
+    if (sortKey !== undefined) {
+      const sortDirValue = sortDir === "asc" ? "asc" : "desc";
+      query.orderBy(sortKey, sortDirValue);
+    }
+
+    if (availableReservations !== undefined) {
+      const hasAvailableSpots = availableReservations === 'true';
+  
+      // Use a left join to count the reservations for each meal
+      query.leftJoin('Reservation', 'Meal.id', 'Reservation.meal_id')
+          .select('Meal.*') // Select all columns from the Meal table
+          .groupBy('Meal.id');
+  
+      if (hasAvailableSpots) {
+          // Filter meals that still have available spots
+          query.havingRaw('COUNT(Reservation.id) < Meal.max_reservations');
+      } else {
+          // Filter meals that have no available spots left
+          query.havingRaw('COUNT(Reservation.id) >= Meal.max_reservations');
+      }
+  }
+  
 
     const meals = await query;
     res.json(meals);
