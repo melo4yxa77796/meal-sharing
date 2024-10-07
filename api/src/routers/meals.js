@@ -5,7 +5,80 @@ const mealsRouter = express.Router();
 
 mealsRouter.get("/", async (req, res, next) => {
   try {
-    const meals = await knex("Meal");
+    const {
+      maxPrice,
+      title,
+      dateAfter,
+      dateBefore,
+      limit,
+      sortKey,
+      sortDir,
+      availableReservations,
+    } = req.query;
+    const query = knex("Meal");
+    if (maxPrice !== undefined) {
+      query.where("price", "<", maxPrice);
+    }
+    if (title !== undefined) {
+      query.where("title", "like", `%${title}%`);
+    }
+    if (dateAfter !== undefined) {
+      const formattedDate = new Date(dateAfter);
+
+      if (isNaN(formattedDate.getTime())) {
+        const error = new Error("Invalid date format.");
+        error.status = 400;
+        return next(error);
+      }
+      const dateString = formattedDate.toISOString().split("T")[0];
+      query.where("created_date", ">", dateString);
+    }
+
+    if (dateBefore !== undefined) {
+      const formattedDate = new Date(dateBefore);
+      if (isNaN(formattedDate.getTime())) {
+        const error = new Error("Invalid date format.");
+        error.status = 400;
+        return next(error);
+      }
+      const dateString = formattedDate.toISOString().split("T")[0];
+      query.where("created_date", "<", dateString);
+    }
+    if (limit !== undefined) {
+      const limitValue = parseInt(limit, 10);
+      if (!isNaN(limitValue) && limitValue > 0) {
+        query.limit(limitValue);
+      }
+    }
+
+    if (sortKey !== undefined) {
+      query.orderBy(sortKey);
+    }
+
+    if (sortDir !== undefined) {
+      const sortDirValue = sortDir === "asc" ? "asc" : "desc";
+      query.orderBy(sortKey, sortDirValue);
+    }
+
+    if (availableReservations !== undefined) {
+      const hasAvailableSpots = availableReservations === "true";
+
+      
+      query
+        .leftJoin("Reservation", "Meal.id", "Reservation.meal_id")
+        .select("Meal.*") 
+        .groupBy("Meal.id");
+
+      if (hasAvailableSpots) {
+        
+        query.havingRaw("COUNT(Reservation.id) < Meal.max_reservations");
+      } else {
+        
+        query.havingRaw("COUNT(Reservation.id) >= Meal.max_reservations");
+      }
+    }
+
+    const meals = await query;
     res.json(meals);
   } catch (error) {
     next(error);
