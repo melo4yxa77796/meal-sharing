@@ -3,11 +3,35 @@ import knex from "../database_client.js";
 
 const reviewsRouter = express.Router();
 
+function validateReviewFields({
+  title,
+  description,
+  meal_id,
+  stars,
+  created_date,
+}) {
+  if (!title || !description || !meal_id || !stars || !created_date) {
+    return {
+      valid: false,
+      error:
+        "Fields title, description, meal_id, stars, and created_date are required.",
+    };
+  }
+
+  if (stars < 1 || stars > 5) {
+    return {
+      valid: false,
+      error: "Stars must be between 1 and 5.",
+    };
+  }
+
+  return { valid: true };
+}
+
 reviewsRouter.get("/", async (req, res, next) => {
   console.log("GET /api/reviews route called");
   try {
     const reviews = await knex("Review");
-    console.log("Reviews retrieved:", reviews);
     res.json(reviews);
   } catch (error) {
     console.error("Error retrieving reviews:", error);
@@ -15,20 +39,19 @@ reviewsRouter.get("/", async (req, res, next) => {
   }
 });
 
-reviewsRouter.post("/", async (req, res) => {
+reviewsRouter.post("/", async (req, res, next) => {
   const { title, description, meal_id, stars, created_date } = req.body;
 
-  if (!title || !description || !meal_id || !stars || !created_date) {
-    return res.status(400).json({
-      error:
-        "Fields title, description, meal_id, stars, and created_date are required.",
-    });
-  }
+  const validation = validateReviewFields({
+    title,
+    description,
+    meal_id,
+    stars,
+    created_date,
+  });
 
-  if (stars < 1 || stars > 5) {
-    return res.status(400).json({
-      error: "Stars must be between 1 and 5.",
-    });
+  if (!validation.valid) {
+    return res.status(400).json({ error: validation.error });
   }
 
   try {
@@ -63,38 +86,41 @@ reviewsRouter.get("/:id", async (req, res) => {
   }
 });
 
-reviewsRouter.put("/:id", async (req, res) => {
+reviewsRouter.put("/:id", async (req, res, next) => {
   const { id } = req.params;
   const { title, description, meal_id, stars, created_date } = req.body;
 
-  if (!title || !description || !meal_id || !stars || !created_date) {
-    return res.status(400).json({
-      error:
-        "Fields title, description, meal_id, stars, and created_date are required.",
-    });
-  }
+  const validation = validateReviewFields({
+    title,
+    description,
+    meal_id,
+    stars,
+    created_date,
+  });
 
-  if (stars < 1 || stars > 5) {
-    return res.status(400).json({
-      error: "Stars must be between 1 and 5.",
-    });
+  if (!validation.valid) {
+    return res.status(400).json({ error: validation.error });
   }
 
   try {
-    const updatedReview = await knex("Review").where({ id }).update({
+    const updatedRows = await knex("Review").where({ id }).update({
       title,
       description,
       meal_id,
       stars,
       created_date,
     });
-    if (!updatedReview) {
+
+    if (updatedRows === 0) {
       return res.status(404).json({ error: "Review not found." });
     }
-    res.json({ message: "Review updated successfully." });
+
+    res.status(200).json({
+      message: "Review updated successfully.",
+    });
   } catch (error) {
     console.error("Error updating review:", error);
-    res.status(500).json({ error: "Server error while updating review." });
+    next(error);
   }
 });
 

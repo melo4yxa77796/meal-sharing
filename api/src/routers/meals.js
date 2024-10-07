@@ -55,7 +55,7 @@ mealsRouter.get("/", async (req, res, next) => {
       query.orderBy(sortKey);
     }
 
-    if (sortKey !== undefined) {
+    if (sortDir !== undefined) {
       const sortDirValue = sortDir === "asc" ? "asc" : "desc";
       query.orderBy(sortKey, sortDirValue);
     }
@@ -63,17 +63,17 @@ mealsRouter.get("/", async (req, res, next) => {
     if (availableReservations !== undefined) {
       const hasAvailableSpots = availableReservations === "true";
 
-      // Use a left join to count the reservations for each meal
+      
       query
         .leftJoin("Reservation", "Meal.id", "Reservation.meal_id")
-        .select("Meal.*") // Select all columns from the Meal table
+        .select("Meal.*") 
         .groupBy("Meal.id");
 
       if (hasAvailableSpots) {
-        // Filter meals that still have available spots
+        
         query.havingRaw("COUNT(Reservation.id) < Meal.max_reservations");
       } else {
-        // Filter meals that have no available spots left
+        
         query.havingRaw("COUNT(Reservation.id) >= Meal.max_reservations");
       }
     }
