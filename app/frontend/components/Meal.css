@@ -1,0 +1,29 @@
+
+.meal-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.meal-card:hover {
+    transform: scale(1.05);
+}
+
+.meal-title {
+    font-size: 1.5em;
+    margin-bottom: 8px;
+}
+
+.meal-description {
+    font-size: 1em;
+    color: #555;
+}
+
+.meal-price {
+    font-weight: bold;
+    color: #333;
+}

@@ -1,40 +1,40 @@
 "use client";
 
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
+import Meal from "./Meal";
+import "./MealsList.css";
 
 function MealsList() {
-    const [meals, setMeals] = useState([]);
+  const [meals, setMeals] = useState([]);
 
-    const fetchData = async () => {
-        try {
-            const response = await fetch('http://localhost:3001/all-meals');
-            const data = await response.json();
-            setMeals(data);
-        } catch (error) {
-            console.error(error);
-        }
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/all-meals");
+      const data = await response.json();
+      setMeals(data);
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    return (
-        <>
-            <h2>Meals</h2>
-            {meals.length > 0 ? (
-                meals.map((meal, index) => (
-                    <div key={index}>
-                        <h3>{meal.title}</h3>
-                        <p>{meal.description}</p>
-                        <p>{meal.price}</p>
-                    </div>
-                ))
-            ) : (
-                <p>Loading meals...</p>
-            )}
-        </>
-    )
+  return (
+    <>
+      <h2 style={{ textAlign: "center" }}>Meals</h2>
+      <div className="meals-grid">
+        {" "}
+        {}
+        {meals.length > 0 ? (
+          meals.map((meal) => <Meal key={meal.id} meal={meal} />)
+        ) : (
+          <p>Loading meals...</p>
+        )}
+      </div>
+    </>
+  );
 }
 
 export default MealsList;
