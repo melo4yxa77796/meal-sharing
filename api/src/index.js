@@ -9,7 +9,7 @@ import reservationsRouter from "./routers/reservations.js";
 import reviewsRouter from "./routers/reviews.js";
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: '*'}));
 app.use(bodyParser.json());
 
 const apiRouter = express.Router();
