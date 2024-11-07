@@ -98,10 +98,9 @@ mealsRouter.get("/:id", async (req, res, next) => {
     const reservationsCount = await knex("Reservation").where({ meal_id: id }).count({ count: '*' });
     const availableReservations = meal.max_reservations - reservationsCount[0].count;
 
-    // Отправка ответа с доступными местами
     res.json({
       ...meal,
-      availableReservations: availableReservations < 0 ? 0 : availableReservations // Убедитесь, что не меньше 0
+      availableReservations: availableReservations < 0 ? 0 : availableReservations 
     });
   } catch (error) {
     next(error);
