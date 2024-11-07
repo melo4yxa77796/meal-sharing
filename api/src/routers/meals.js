@@ -95,8 +95,14 @@ mealsRouter.get("/:id", async (req, res, next) => {
       error.status = 404;
       return next(error);
     }
+    const reservationsCount = await knex("Reservation").where({ meal_id: id }).count({ count: '*' });
+    const availableReservations = meal.max_reservations - reservationsCount[0].count;
 
-    res.json(meal);
+    // Отправка ответа с доступными местами
+    res.json({
+      ...meal,
+      availableReservations: availableReservations < 0 ? 0 : availableReservations // Убедитесь, что не меньше 0
+    });
   } catch (error) {
     next(error);
   }

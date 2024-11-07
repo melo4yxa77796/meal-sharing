@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage.jsx";
 import TestPage from "./components/TestPage/TestPage.jsx";
 import "./main.css";
+import MealDetail from "../frontend/components/MealDetail.jsx";
+import MealsList from "../frontend/components/MealsList.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
   {
     path: "/nested",
     element: <TestPage />,
+  },
+  {
+    path: "/meals",
+    element: <MealsList />,
+  },
+  {
+    path: "/meals/:id", 
+    element: <MealDetail />,
   },
   
 ]);
