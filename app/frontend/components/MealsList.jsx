@@ -1,8 +1,9 @@
+
 import React, { useEffect, useState } from "react";
 import Meal from "./Meal";
 import "./MealsList.css";
 
-function MealsList() {
+function MealsList({ limit }) {  // Accept limit prop
   const [meals, setMeals] = useState([]);
 
   const fetchData = async () => {
@@ -19,14 +20,15 @@ function MealsList() {
     fetchData();
   }, []);
 
+  
+  const limitedMeals = limit ? meals.slice(0, limit) : meals;
+
   return (
     <>
       <h2 style={{ textAlign: "center" }}>Meals</h2>
       <div className="meals-grid">
-        {" "}
-        {}
         {meals.length > 0 ? (
-          meals.map((meal) => <Meal key={meal.id} meal={meal} />)
+          limitedMeals.map((meal) => <Meal key={meal.id} meal={meal} />)
         ) : (
           <p>Loading meals...</p>
         )}
@@ -36,3 +38,4 @@ function MealsList() {
 }
 
 export default MealsList;
+

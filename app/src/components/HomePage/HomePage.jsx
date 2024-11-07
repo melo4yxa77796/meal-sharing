@@ -5,10 +5,18 @@ import MealsList from "../../../frontend/components/MealsList";
 import { Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom"; 
 
+import Navbar from "../../../frontend/components/Navbar";
+
+
+
+
+
 // Feel free to replace the content of this component with your own
 function HomePage() {
   return (
-    <>
+    
+    <> 
+    <Navbar />  
       <div className="home-page">
      
       <header className="header">
@@ -22,12 +30,12 @@ function HomePage() {
         </Typography>
       </header>
 
-      {/* Секция со списком блюд */}
+      {}
       <section className="meals-section">
-        <MealsList limit={4} /> {/* Отобразить только ограниченное количество блюд */}
+        <MealsList  limit={6} /> { }
       </section>
 
-      {/* Кнопка для перехода к списку блюд */}
+      {}
       <footer className="footer">
         <Link to="/meals">
           <Button variant="contained" color="primary">
