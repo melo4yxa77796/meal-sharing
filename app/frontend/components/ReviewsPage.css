@@ -1,0 +1,15 @@
+.reviews-page {
+  margin: 20px;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+button {
+  align-self: flex-start;
+}

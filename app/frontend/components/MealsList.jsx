@@ -1,9 +1,8 @@
-
 import React, { useEffect, useState } from "react";
 import Meal from "./Meal";
 import "./MealsList.css";
 
-function MealsList({ limit }) {  // Accept limit prop
+function MealsList({ limit }) {
   const [meals, setMeals] = useState([]);
 
   const fetchData = async () => {
@@ -20,7 +19,6 @@ function MealsList({ limit }) {  // Accept limit prop
     fetchData();
   }, []);
 
-  
   const limitedMeals = limit ? meals.slice(0, limit) : meals;
 
   return (
@@ -38,4 +36,3 @@ function MealsList({ limit }) {  // Accept limit prop
 }
 
 export default MealsList;
-
