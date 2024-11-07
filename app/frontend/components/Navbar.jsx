@@ -13,17 +13,17 @@ const Navbar = () => {
 
         <ul className="nav-menu">
           <li className="nav-item">
-            <Link to="/about" className="nav-links">
+            <Link to="/" className="nav-links">
               About
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/services" className="nav-links">
+            <Link to="/meals" className="nav-links">
               Meals
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/contact" className="nav-links">
+            <Link to="/reviews" className="nav-links">
               Reviews
             </Link>
           </li>
