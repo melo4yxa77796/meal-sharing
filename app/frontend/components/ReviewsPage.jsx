@@ -1,15 +1,16 @@
+
+
+
 import React, { useState } from "react";
 import { TextField, Button, Typography } from "@mui/material";
 import "./ReviewsPage.css";
 
-const ReviewsPage = () => {
+const ReviewsPage = ({ mealId }) => {  
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [mealId, setMealId] = useState("");
-  const [isFormVisible, setIsFormVisible] = useState(false);
-
   const [stars, setStars] = useState(5);
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   const createdDate = new Date().toISOString().split("T")[0];
 
@@ -20,7 +21,7 @@ const ReviewsPage = () => {
       name,
       title,
       description,
-      meal_id: mealId,
+      meal_id: mealId,  // Используем mealId из пропсов
       stars,
       created_date: createdDate,
     };
@@ -39,7 +40,6 @@ const ReviewsPage = () => {
         setName("");
         setTitle("");
         setDescription("");
-        setMealId("");
         setStars(5);
         setIsFormVisible(false);
       } else {
@@ -97,15 +97,6 @@ const ReviewsPage = () => {
             required
           />
           <TextField
-            label="Meal ID"
-            variant="outlined"
-            fullWidth
-            value={mealId}
-            onChange={(e) => setMealId(e.target.value)}
-            margin="normal"
-            required
-          />
-          <TextField
             label="Stars"
             variant="outlined"
             fullWidth
@@ -127,3 +118,4 @@ const ReviewsPage = () => {
 };
 
 export default ReviewsPage;
+

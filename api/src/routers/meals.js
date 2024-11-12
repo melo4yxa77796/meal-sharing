@@ -145,7 +145,7 @@ mealsRouter.post("/", async (req, res, next) => {
 
 mealsRouter.put("/:id", async (req, res, next) => {
   const { id } = req.params;
-  const { title, description, location, when, max_reservations, price } =
+  const { title, description, location, when, max_reservations, price, } =
     req.body;
 
   if (!title || !when || !max_reservations || !price) {
@@ -179,6 +179,12 @@ mealsRouter.put("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
+
+
+
+
+
 
 mealsRouter.delete("/:id", async (req, res, next) => {
   const { id } = req.params;

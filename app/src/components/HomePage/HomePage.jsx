@@ -11,7 +11,7 @@ import Navbar from "../../../frontend/components/Navbar";
 function HomePage() {
   return (
     <>
-      <Navbar />
+      
       <div className="home-page">
         <header className="header">
           <Typography variant="h1" gutterBottom>
@@ -35,7 +35,7 @@ function HomePage() {
             </Button>
           </Link>
         </section>
-        <Footer />
+        
       </div>
     </>
   );

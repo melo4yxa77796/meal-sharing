@@ -1,7 +1,7 @@
-// Footer.js
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Footer.css';  // Для стилей футера, если нужно
+import './Footer.css';  
 
 const Footer = () => {
   return (
@@ -15,7 +15,7 @@ const Footer = () => {
             <Link to="/meals" className="footer-link">Meals</Link>
           </li>
           <li>
-            <Link to="/reviews" className="footer-link">Reviews</Link>
+            <Link to="/contacts" className="footer-link">Contacts</Link>
           </li>
         </ul>
         <div className="footer-text">
