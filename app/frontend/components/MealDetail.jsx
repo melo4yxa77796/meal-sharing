@@ -3,12 +3,10 @@ import { useParams } from "react-router-dom";
 import { Typography, TextField, Button } from "@mui/material";
 import ReviewsPage from "./ReviewsPage";
 
-
 const MealDetail = () => {
   const { id } = useParams();
   const [meal, setMeal] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const [reservationData, setReservationData] = useState({
     number_of_guests: "",
     contact_name: "",
@@ -18,13 +16,16 @@ const MealDetail = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  
   const fetchMeal = async () => {
     try {
       const response = await fetch(`http://localhost:3001/api/meals/${id}`);
       if (response.ok) {
         const data = await response.json();
-        setMeal(data);
+
+        setMeal({
+          ...data.meal,
+          availableReservations: data.availableReservations,
+        });
       } else {
         console.error("Failed to fetch meal data");
       }
@@ -35,18 +36,15 @@ const MealDetail = () => {
     }
   };
 
-  
   useEffect(() => {
     fetchMeal();
   }, [id]);
 
- 
   const handleReservationChange = (e) => {
     const { name, value } = e.target;
     setReservationData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  
   const handleReservationSubmit = async (e) => {
     e.preventDefault();
     const {
@@ -56,17 +54,12 @@ const MealDetail = () => {
       contact_email,
     } = reservationData;
 
-    
     if (number_of_guests > meal.availableReservations) {
       alert("Number of guests exceeds available reservations.");
       return;
     }
 
-    const updatedMeal = { ...meal, availableReservations: meal.availableReservations - number_of_guests };
-    setMeal(updatedMeal); 
-
     try {
-      
       const response = await fetch("http://localhost:3001/api/reservations", {
         method: "POST",
         headers: {
@@ -85,7 +78,6 @@ const MealDetail = () => {
         setSuccessMessage("Reservation successfully created!");
         setErrorMessage("");
 
-        
         setReservationData({
           number_of_guests: "",
           contact_name: "",
@@ -93,25 +85,7 @@ const MealDetail = () => {
           contact_email: "",
         });
 
-        
-        const updateResponse = await fetch(`http://localhost:3001/api/meals/${id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            title: meal.title,               
-            when: meal.when,                 
-            price: meal.price,               
-            max_reservations: meal.max_reservations,  
-            availableReservations: updatedMeal.availableReservations, 
-          }),
-        });
-
-        if (!updateResponse.ok) {
-          console.error("Failed to update available reservations on server.");
-        }
-  
+        fetchMeal();
       } else {
         setErrorMessage("Failed to create reservation.");
       }
@@ -128,8 +102,6 @@ const MealDetail = () => {
   return (
     <div className="meal-detail">
       <h1>{meal.title}</h1>
-      <p>{meal.description}</p>
-      <p>Price: {meal.price}</p>
 
       <div className="meal-detail-container">
         <div className="meal-info">
@@ -137,13 +109,16 @@ const MealDetail = () => {
             Meal Information
           </Typography>
           <p>{meal.description}</p>
+          <p>Price: ${meal.price}</p>
           <p>Available Reservations: {meal.availableReservations}</p>
 
           {meal.availableReservations > 0 ? (
-            <form onSubmit={handleReservationSubmit} className="reservation-form">
+            <form
+              onSubmit={handleReservationSubmit}
+              className="reservation-form"
+            >
               <Typography variant="h6">Make a Reservation</Typography>
 
-            
               <TextField
                 label="Number of Guests"
                 variant="outlined"

@@ -21,7 +21,7 @@ const ReviewsPage = ({ mealId }) => {
       name,
       title,
       description,
-      meal_id: mealId,  // Используем mealId из пропсов
+      meal_id: mealId,  
       stars,
       created_date: createdDate,
     };
