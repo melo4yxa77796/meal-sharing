@@ -3,30 +3,36 @@ import "./Meal.css";
 import { Link } from "react-router-dom";
 
 const Meal = ({ meal }) => {
-  const [availableSpots, setAvailableSpots] = useState(null); // Состояние для оставшихся мест
+  const [availableSpots, setAvailableSpots] = useState(meal.availableSpots);
+  const [isLoading, setIsLoading] = useState(false);
+
   const price =
     typeof meal.price === "string" ? parseFloat(meal.price) : meal.price;
 
-  useEffect(() => {
-    const fetchAvailableSpots = async () => {
-      try {
-        const response = await fetch(`http://localhost:3001/api/meals/${meal.id}/spots`);
-        // Запрос к эндпоинту
+  const fetchAvailableSpots = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/meals/${meal.id}/spots`
+      );
+      if (response.ok) {
         const data = await response.json();
         setAvailableSpots(data.availableSpots);
-      } catch (error) {
-        console.error("Error fetching available spots:", error);
+      } else {
+        console.error("Failed to fetch available spots");
       }
-    };
+    } catch (error) {
+      console.error("Error fetching available spots:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchAvailableSpots();
 
-    // Обновление данных каждые 5 секунд
     const interval = setInterval(() => {
       fetchAvailableSpots();
-    }, 5000);
+    }, 10000);
 
-    return () => clearInterval(interval); // Очистка интервала при размонтировании компонента
+    return () => clearInterval(interval);
   }, [meal.id]);
 
   return (
@@ -34,13 +40,12 @@ const Meal = ({ meal }) => {
       <h3 className="meal-title">{meal.title}</h3>
       <p className="meal-description">{meal.description}</p>
       <p className="meal-price">Price: ${price.toFixed(2)}</p>
-      {/* Добавляем индикатор оставшихся мест */}
+
       <p className="meal-spots">
-        Available Spots: {availableSpots !== null ? availableSpots : "Loading..."}
+        {isLoading ? "Loading..." : `Available Spots: ${availableSpots}`}
       </p>
     </Link>
   );
 };
 
 export default Meal;
-

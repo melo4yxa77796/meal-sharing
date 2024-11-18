@@ -1,7 +1,6 @@
 import cron from "node-cron";
 import knex from "../database_client.js";
 
-
 const resetOldReservations = async () => {
   console.log("Task resetOldReservations...");
 
@@ -37,5 +36,4 @@ const resetOldReservations = async () => {
   }
 };
 
-cron.schedule("*/5 * * * * * ", resetOldReservations);
-
+cron.schedule("*/3   * * * * ", resetOldReservations);

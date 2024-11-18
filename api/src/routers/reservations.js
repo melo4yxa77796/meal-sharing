@@ -30,18 +30,22 @@ reservationsRouter.post("/", async (req, res) => {
     });
   }
 
+  if (number_of_guests <= 0 || isNaN(number_of_guests)) {
+    return res.status(400).json({ error: "Invalid number of guests." });
+  }
+
   try {
     const meal = await knex("Meal").where({ id: meal_id }).first();
     if (!meal) {
       return res.status(404).json({ message: "Meal not found" });
     }
 
-    const totalReserved = await knex("Reservation")
+    const totalReservedResult = await knex("Reservation")
       .where({ meal_id })
       .sum("number_of_guests as total");
+    const totalReserved = totalReservedResult[0].total || 0;
 
-    const availableReservations =
-      meal.max_reservations - (totalReserved[0].total || 0);
+    const availableReservations = meal.max_reservations - totalReserved;
 
     if (number_of_guests > availableReservations) {
       return res
@@ -59,14 +63,12 @@ reservationsRouter.post("/", async (req, res) => {
       contact_email,
     });
 
-    res
-      .status(201)
-      .json({
-        id: newReservation[0],
-        message: "Reservation successfully created",
-      });
+    res.status(201).json({
+      id: newReservation[0],
+      message: "Reservation successfully created",
+    });
   } catch (error) {
-    console.error("Error creating reservation:", error);
+    console.error("Database error:", error.message, error.stack);
     res.status(500).json({ error: "Server error while creating reservation." });
   }
 });
