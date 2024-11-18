@@ -107,6 +107,33 @@ mealsRouter.get("/:id", async (req, res, next) => {
   }
 });
 
+mealsRouter.get("/:id/spots", async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const meal = await knex("Meal").where({ id }).first();
+    if (!meal) {
+      return res.status(404).json({ message: "Meal not found" });
+    }
+
+    const totalReserved = await knex("Reservation")
+      .where({ meal_id: id })
+      .sum("number_of_guests as total");
+
+    const availableSpots =
+      meal.max_reservations - (totalReserved[0].total || 0);
+
+    res.json({ availableSpots });
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
+
+
+
 mealsRouter.post("/", async (req, res, next) => {
   const { title, description, location, when, max_reservations, price } =
     req.body;

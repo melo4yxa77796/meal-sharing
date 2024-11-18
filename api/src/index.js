@@ -95,6 +95,7 @@ app.use("/api/meals", mealsRouter);
 app.use("/api/reservations", reservationsRouter);
 app.use("/api/reviews", reviewsRouter);
 
+
 app.use((err, req, res, next) => {
   console.error("Server Error:", err);
   res.status(err.status || 500).json({ error: err.message || "Server error" });
