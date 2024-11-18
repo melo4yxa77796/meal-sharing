@@ -24,3 +24,4 @@ function MealSearch({ meals, onFilter }) {
 }
 
 export default MealSearch;
+ 
