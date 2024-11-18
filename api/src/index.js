@@ -7,9 +7,10 @@ import nestedRouter from "./routers/nested.js";
 import mealsRouter from "./routers/meals.js";
 import reservationsRouter from "./routers/reservations.js";
 import reviewsRouter from "./routers/reviews.js";
+import "./routers/resetReservations.js";
 
 const app = express();
-app.use(cors({ origin: '*'}));
+app.use(cors({ origin: "*" }));
 app.use(bodyParser.json());
 
 const apiRouter = express.Router();

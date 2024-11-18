@@ -29,7 +29,6 @@ function validateReviewFields({
 }
 
 reviewsRouter.get("/", async (req, res, next) => {
-  console.log("GET /api/reviews route called");
   try {
     const reviews = await knex("Review");
     res.json(reviews);
@@ -40,6 +39,7 @@ reviewsRouter.get("/", async (req, res, next) => {
 });
 
 reviewsRouter.post("/", async (req, res, next) => {
+  console.log("POST /api/reviews called");
   const { title, description, meal_id, stars, created_date } = req.body;
 
   const validation = validateReviewFields({

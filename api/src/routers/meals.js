@@ -63,17 +63,14 @@ mealsRouter.get("/", async (req, res, next) => {
     if (availableReservations !== undefined) {
       const hasAvailableSpots = availableReservations === "true";
 
-      
       query
         .leftJoin("Reservation", "Meal.id", "Reservation.meal_id")
-        .select("Meal.*") 
+        .select("Meal.*")
         .groupBy("Meal.id");
 
       if (hasAvailableSpots) {
-        
         query.havingRaw("COUNT(Reservation.id) < Meal.max_reservations");
       } else {
-        
         query.havingRaw("COUNT(Reservation.id) >= Meal.max_reservations");
       }
     }
@@ -86,17 +83,25 @@ mealsRouter.get("/", async (req, res, next) => {
 });
 
 mealsRouter.get("/:id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const meal = await knex("Meal").where({ id }).first();
+  const { id } = req.params;
 
+  try {
+    const meal = await knex("Meal").where({ id }).first();
     if (!meal) {
-      const error = new Error("Meal not found");
-      error.status = 404;
-      return next(error);
+      return res.status(404).json({ message: "Meal not found" });
     }
 
-    res.json(meal);
+    const totalReserved = await knex("Reservation")
+      .where({ meal_id: id })
+      .sum("number_of_guests as total");
+
+    const availableReservations =
+      meal.max_reservations - (totalReserved[0].total || 0);
+
+    res.json({
+      meal,
+      availableReservations,
+    });
   } catch (error) {
     next(error);
   }
