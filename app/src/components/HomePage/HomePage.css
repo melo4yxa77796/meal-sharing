@@ -7,3 +7,23 @@
 .message {
   margin: auto;
 }
+
+.home-page .meals-slider-section {
+  margin: 0 auto;
+  max-width: 1200px; /* Ограничение ширины контейнера */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide > div {
+  max-width: 225px; /* Ширина карточки */
+  width: 100%; /* Чтобы карточка занимала доступное место */
+}
+
+.swiper {
+  padding-bottom: 30px; /* Пространство для пагинации */
+}

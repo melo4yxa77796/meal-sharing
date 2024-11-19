@@ -8,10 +8,18 @@ import mealsRouter from "./routers/meals.js";
 import reservationsRouter from "./routers/reservations.js";
 import reviewsRouter from "./routers/reviews.js";
 import "./routers/resetReservations.js";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs/promises";
 
 const app = express();
 app.use(cors({ origin: "*" }));
 app.use(bodyParser.json());
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const uploadsPath = path.join(__dirname, "../../app/uploads");
 
 const apiRouter = express.Router();
 
@@ -94,7 +102,7 @@ app.use("/nested", nestedRouter);
 app.use("/api/meals", mealsRouter);
 app.use("/api/reservations", reservationsRouter);
 app.use("/api/reviews", reviewsRouter);
-
+app.use("/uploads", express.static(uploadsPath));
 
 app.use((err, req, res, next) => {
   console.error("Server Error:", err);
