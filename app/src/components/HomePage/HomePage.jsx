@@ -181,7 +181,7 @@ function HomePage() {
           modules={[Navigation, Pagination]}
           navigation
           pagination={{ clickable: true }}
-          spaceBetween={10}
+          spaceBetween={20}
           slidesPerView={4} // Отображение 3 карточек на экране
           breakpoints={{
             640: { slidesPerView: 1 },
@@ -189,10 +189,10 @@ function HomePage() {
             1024: { slidesPerView: 3 },
           }}
           style={{
-            padding: "5px", // Отступы вокруг слайдера
+            padding: "20px", // Отступы вокруг слайдера
           }}
         >
-          {meals.slice(0, 6).map((meal) => (
+          {meals.slice(0, 8).map((meal) => (
             <SwiperSlide
               key={meal.id}
               style={{
@@ -200,7 +200,7 @@ function HomePage() {
                 justifyContent: "center",
               }}
             >
-              <div style={{ width: "225px" }}> {/* Ширина карточки как в MealsList */}
+              <div style={{ width: "300px" }}> {/* Ширина карточки как в MealsList */}
                 <Meal meal={meal} />
               </div>
             </SwiperSlide>

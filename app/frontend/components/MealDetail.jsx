@@ -104,12 +104,17 @@ const MealDetail = () => {
     
     <div className="meal-detail">
       <h1>{meal.title}</h1>
-
+      <img
+          src={`http://localhost:3001${meal.image_path}`}
+          alt={meal.title}
+          className="meal-image" 
+        />
       <div className="meal-detail-container">
         <div className="meal-info">
           <Typography variant="h5" gutterBottom>
             Meal Information
           </Typography>
+         
           <p>{meal.description}</p>
           <p>Price: ${meal.price}</p>
           <p>Available Reservations: {meal.availableReservations}</p>
