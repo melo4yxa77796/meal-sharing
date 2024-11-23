@@ -1,0 +1,20 @@
+.meal-detail-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.meal-info {
+  width: 45%;
+}
+
+.reviews-section {
+  width: 45%;
+}
+.meal-image{
+  width: 60%;
+  height: 30%;
+  margin: 0 auto;
+}
+
+  
+ 
