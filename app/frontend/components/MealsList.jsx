@@ -134,4 +134,3 @@ function MealsList({ limit }) {
 }
 
 export default MealsList;
-

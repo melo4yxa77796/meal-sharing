@@ -1,7 +1,6 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Footer.css';  
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Footer.css";
 
 const Footer = () => {
   return (
@@ -9,13 +8,19 @@ const Footer = () => {
       <div className="footer-content">
         <ul className="footer-links">
           <li>
-            <Link to="/" className="footer-link">About</Link>
+            <Link to="/" className="footer-link">
+              About
+            </Link>
           </li>
           <li>
-            <Link to="/meals" className="footer-link">Meals</Link>
+            <Link to="/meals" className="footer-link">
+              Meals
+            </Link>
           </li>
           <li>
-            <Link to="/contacts" className="footer-link">Contacts</Link>
+            <Link to="/contacts" className="footer-link">
+              Contacts
+            </Link>
           </li>
         </ul>
         <div className="footer-text">

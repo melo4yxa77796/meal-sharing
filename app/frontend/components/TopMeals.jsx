@@ -14,7 +14,7 @@ const TopMeals = () => {
 
         const data = await response.json();
 
-        console.log("Fetched top meals:", data); // Проверяем данные от сервера
+        console.log("Fetched top meals:", data);
 
         setTopMeals(data);
       } catch (error) {

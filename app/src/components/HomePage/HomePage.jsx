@@ -45,7 +45,6 @@ function HomePage() {
         </Typography>
       </header>
 
-      
       <section className="meals-slider-section">
         <h2 style={{ textAlign: "center" }}>Popular Meals</h2>
         <Swiper
@@ -53,14 +52,14 @@ function HomePage() {
           navigation
           pagination={{ clickable: true }}
           spaceBetween={10}
-          slidesPerView={4} 
+          slidesPerView={4}
           breakpoints={{
             640: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 4 },
           }}
           style={{
-            padding: "30px", 
+            padding: "30px",
           }}
         >
           {meals.slice(0, 8).map((meal) => (
@@ -71,7 +70,7 @@ function HomePage() {
                 justifyContent: "center",
               }}
             >
-              <div style={{ width: "250px" }}> 
+              <div style={{ width: "250px" }}>
                 <Meal meal={meal} />
               </div>
             </SwiperSlide>
@@ -79,7 +78,6 @@ function HomePage() {
         </Swiper>
       </section>
 
-      
       <section className="meals-section">
         <Link to="/meals">
           <Button variant="contained" color="primary">

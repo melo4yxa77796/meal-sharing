@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { Typography, TextField, Button } from "@mui/material";
 import ReviewsPage from "./ReviewsPage";
 
-
 const MealDetail = () => {
   const { id } = useParams();
   const [meal, setMeal] = useState(null);
@@ -101,20 +100,19 @@ const MealDetail = () => {
   if (!meal) return <div>Meal not found.</div>;
 
   return (
-    
     <div className="meal-detail">
       <h1>{meal.title}</h1>
       <img
-          src={`http://localhost:3001${meal.image_path}`}
-          alt={meal.title}
-          className="meal-image" 
-        />
+        src={`http://localhost:3001${meal.image_path}`}
+        alt={meal.title}
+        className="meal-image"
+      />
       <div className="meal-detail-container">
         <div className="meal-info">
           <Typography variant="h5" gutterBottom>
             Meal Information
           </Typography>
-         
+
           <p>{meal.description}</p>
           <p>Price: ${meal.price}</p>
           <p>Available Reservations: {meal.availableReservations}</p>

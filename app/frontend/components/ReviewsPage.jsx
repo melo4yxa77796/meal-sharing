@@ -1,11 +1,8 @@
-
-
-
 import React, { useState } from "react";
 import { TextField, Button, Typography } from "@mui/material";
 import "./ReviewsPage.css";
 
-const ReviewsPage = ({ mealId }) => {  
+const ReviewsPage = ({ mealId }) => {
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -21,7 +18,7 @@ const ReviewsPage = ({ mealId }) => {
       name,
       title,
       description,
-      meal_id: mealId,  
+      meal_id: mealId,
       stars,
       created_date: createdDate,
     };
@@ -118,4 +115,3 @@ const ReviewsPage = ({ mealId }) => {
 };
 
 export default ReviewsPage;
-

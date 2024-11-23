@@ -86,29 +86,26 @@ mealsRouter.get("/:id", async (req, res, next) => {
   const { id } = req.params;
 
   try {
-   
     const meal = await knex("Meal").where({ id }).first();
     if (!meal) {
       return res.status(404).json({ message: "Meal not found" });
     }
 
-  
     const totalReserved = await knex("Reservation")
       .where({ meal_id: id })
       .sum("number_of_guests as total");
 
-   
-    const availableReservations = meal.max_reservations - (totalReserved[0].total || 0);
+    const availableReservations =
+      meal.max_reservations - (totalReserved[0].total || 0);
 
     res.json({
       meal,
-      availableReservations
+      availableReservations,
     });
   } catch (error) {
     next(error);
   }
 });
-
 
 mealsRouter.get("/:id/spots", async (req, res, next) => {
   const { id } = req.params;
@@ -136,14 +133,15 @@ mealsRouter.get("/:id/likes", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const totalLikes = await knex("Likes").where({ meal_id: id }).count("* as count");
+    const totalLikes = await knex("Likes")
+      .where({ meal_id: id })
+      .count("* as count");
     res.json({ totalLikes: totalLikes[0].count });
   } catch (error) {
     console.error("Error fetching likes:", error);
     res.status(500).json({ error: "Failed to fetch likes." });
   }
 });
-
 
 mealsRouter.get("/top", async (req, res) => {
   try {
@@ -181,8 +179,6 @@ mealsRouter.get("/top", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch top meals." });
   }
 });
-
-
 
 mealsRouter.post("/", async (req, res, next) => {
   const { title, description, location, when, max_reservations, price } =
@@ -222,7 +218,6 @@ mealsRouter.post("/", async (req, res, next) => {
 
 mealsRouter.post("/:id/like", async (req, res) => {
   try {
-    // Логика не зависит от пользователя, но обрабатывает лайк для блюда
     const { id } = req.params;
     await knex("Likes").insert({ meal_id: id });
     res.status(201).json({ message: "Like added successfully!" });
@@ -231,7 +226,6 @@ mealsRouter.post("/:id/like", async (req, res) => {
     res.status(500).json({ error: "Failed to add like." });
   }
 });
-
 
 mealsRouter.put("/:id", async (req, res, next) => {
   const { id } = req.params;
@@ -269,10 +263,6 @@ mealsRouter.put("/:id", async (req, res, next) => {
     next(error);
   }
 });
-
-
-
-
 
 mealsRouter.delete("/:id", async (req, res, next) => {
   const { id } = req.params;
