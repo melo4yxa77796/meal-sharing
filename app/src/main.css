@@ -6,3 +6,9 @@ body,
   height: 100%;
   width: 100%;
 }
+a {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: inherit;
+  -webkit-tap-highlight-color: transparent;
+}

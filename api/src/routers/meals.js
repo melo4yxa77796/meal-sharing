@@ -82,6 +82,47 @@ mealsRouter.get("/", async (req, res, next) => {
   }
 });
 
+mealsRouter.get("/top", async (req, res) => {
+  try {
+    const topMeals = await knex("Meal")
+      .leftJoin("Likes", function () {
+        this.on("Meal.id", "=", "Likes.meal_id").andOn(
+          "Likes.created_at",
+          ">",
+          knex.raw("DATE_SUB(NOW(), INTERVAL 1 MONTH)")
+        );
+      })
+      .leftJoin("Reservation", "Meal.id", "Reservation.meal_id")
+      .select(
+        "Meal.id",
+        "Meal.title",
+        "Meal.description",
+        "Meal.price",
+        knex.raw("IFNULL(Meal.image_path, '/default-image.jpg') as image_path"),
+        "Meal.max_reservations",
+        knex.raw("COALESCE(COUNT(Likes.id), 0) as totalLikes"),
+        knex.raw(
+          "Meal.max_reservations - COALESCE(SUM(Reservation.number_of_guests), 0) as availableSpots"
+        )
+      )
+      .groupBy(
+        "Meal.id",
+        "Meal.title",
+        "Meal.description",
+        "Meal.price",
+        "Meal.image_path",
+        "Meal.max_reservations"
+      )
+      .orderBy("totalLikes", "desc")
+      .limit(3);
+
+    res.status(200).json(topMeals);
+  } catch (error) {
+    console.error("Error fetching top meals:", error);
+    res.status(500).json({ error: "Failed to fetch top meals." });
+  }
+});
+
 mealsRouter.get("/:id", async (req, res, next) => {
   const { id } = req.params;
 
@@ -140,79 +181,6 @@ mealsRouter.get("/:id/likes", async (req, res) => {
   } catch (error) {
     console.error("Error fetching likes:", error);
     res.status(500).json({ error: "Failed to fetch likes." });
-  }
-});
-
-mealsRouter.get("/top", async (req, res) => {
-  try {
-    console.log("Fetching top meals...");
-
-    const topMeals = await knex("Meal")
-      .leftJoin("Likes", function () {
-        this.on("Meal.id", "=", "Likes.meal_id").andOn(
-          "Likes.created_at",
-          ">",
-          knex.raw("DATE_SUB(NOW(), INTERVAL 1 MONTH)")
-        );
-      })
-      .select(
-        "Meal.id",
-        "Meal.title",
-        "Meal.description",
-        "Meal.price",
-        knex.raw("COALESCE(COUNT(Likes.id), 0) as totalLikes")
-      )
-      .groupBy("Meal.id")
-      .orderBy("totalLikes", "desc")
-      .limit(3);
-
-    console.log("Top meals fetched:", topMeals);
-
-    if (topMeals.length === 0) {
-      console.log("No top meals found.");
-      return res.status(200).json([]);
-    }
-
-    res.status(200).json(topMeals);
-  } catch (error) {
-    console.error("Error in /top endpoint:", error);
-    res.status(500).json({ error: "Failed to fetch top meals." });
-  }
-});
-
-mealsRouter.post("/", async (req, res, next) => {
-  const { title, description, location, when, max_reservations, price } =
-    req.body;
-
-  if (!title || !when || !max_reservations || !price) {
-    const error = new Error(
-      "Fields title, when, max_reservations, and price are required."
-    );
-    error.status = 400;
-    return next(error);
-  }
-
-  try {
-    const formattedDate = new Date(when);
-    if (isNaN(formattedDate.getTime())) {
-      const error = new Error("Invalid date format.");
-      error.status = 400;
-      return next(error);
-    }
-
-    const newMeal = await knex("Meal").insert({
-      title,
-      description,
-      location,
-      when: formattedDate,
-      max_reservations,
-      price,
-      created_date: knex.fn.now(),
-    });
-
-    res.status(201).json({ id: newMeal[0] });
-  } catch (error) {
-    next(error);
   }
 });
 

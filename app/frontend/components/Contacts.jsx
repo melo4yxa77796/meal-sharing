@@ -5,7 +5,7 @@ import TopMeals from "./TopMeals";
 const Contacts = () => {
   return (
     <div className="contacts">
-      <h1>Contacts</h1>
+      <h1>Top 3 Meals This Month</h1>
       <Link to="/">Home</Link>
       <TopMeals />
     </div>
