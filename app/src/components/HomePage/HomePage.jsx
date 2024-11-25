@@ -36,14 +36,69 @@ function HomePage() {
 
   return (
     <div className="home-page">
-      <header className="header">
-        <Typography variant="h1" gutterBottom>
-          Welcome to Meal-Sharing
-        </Typography>
-        <Typography variant="h5" gutterBottom>
-          Discover delicious dishes from around the world!
-        </Typography>
-      </header>
+      <header className="header" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px" }}>
+  
+  <div className="text-column" style={{ flex: 1, marginRight: "20px" }}>
+    <Typography variant="h1" gutterBottom>
+      Welcome to Meal-Sharing
+    </Typography>
+    <Typography variant="h5" gutterBottom>
+      Discover delicious dishes from around the world!
+      Enjoy exclusive discounts on your favorite meals and reserve a table at your preferred restaurant with ease.
+      Experience the joy of enjoying culinary delights with special offers tailored just for you. 
+      Don’t wait, book your table now and savor in a world of flavors!
+    </Typography>
+    <section className="meals-section" style={{ marginTop: "20px" }}>
+      <Link to="/meals">
+        <Button
+          variant="contained"
+          className="view-all-meals-button"
+          sx={{
+            borderRadius: "10px",
+            backgroundColor: "#fcd1cf",
+            color: "white",
+            "&:hover": {
+              backgroundColor: "#8cc7b4",
+            },
+          }}
+        >
+          View All Meals
+        </Button>
+      </Link>
+      <Link to="/contacts" style={{ marginLeft: "10px" }}>
+        <Button
+          variant="contained"
+          className="view-all-meals-button"
+          sx={{
+            borderRadius: "10px",
+            backgroundColor: "#fcd1cf",
+            color: "white",
+            "&:hover": {
+              backgroundColor: "#8cc7b4",
+            },
+          }}
+        >
+          Get More
+        </Button>
+      </Link>
+    </section>
+  </div>
+
+  
+  <div className="image-column" style={{ flex: 1 }}>
+    <img
+      src="/upload/burger.jpeg" 
+      alt="Delicious meals"
+      style={{
+        width: "100%",
+        height: "auto",
+        borderRadius: "10px",
+        objectFit: "cover",
+      }}
+    />
+  </div>
+</header>
+
 
       <section className="meals-slider-section">
         <h2 style={{ textAlign: "center" }}>Popular Meals</h2>
@@ -77,14 +132,14 @@ function HomePage() {
           ))}
         </Swiper>
       </section>
-
       <section className="meals-section">
         <Link to="/meals">
-          <Button variant="contained" color="primary">
+          <Button variant="contained" className="view-all-meals-button">
             View All Meals
           </Button>
         </Link>
       </section>
+     
     </div>
   );
 }

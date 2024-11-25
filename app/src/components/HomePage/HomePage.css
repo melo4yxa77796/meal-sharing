@@ -8,7 +8,8 @@
   align-items: center;
   padding: 10px;
   box-sizing: border-box;
-  background: none; 
+ background: none;
+
   border: none; 
   border-radius: 0; 
   box-shadow: none; 
@@ -28,3 +29,25 @@
 
 }
  
+.header{
+  padding-top: 30px; 
+      color: white;
+      text-align: center;
+     
+      font-family: Arial, sans-serif;
+}
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column; /* Вертикальная колонка */
+    align-items: center;
+  }
+
+  .text-column {
+    margin-right: 0; /* Убираем отступ */
+    text-align: center;
+  }
+
+  .image-column {
+    margin-top: 20px; /* Отступ для изображения */
+  }
+}
