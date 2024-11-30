@@ -4,14 +4,28 @@
   box-sizing: border-box;
 }
 
+
 html,
 body,
 #root {
-  
-  
-  background:  linear-gradient(to right, #0c2a27, #8cc7b4);
-  ;
-      min-height: 100vh; 
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #0c2a27, #8cc7b4);
+  min-height: 100vh;
+  background-size: 100% 100vh; 
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
+body {
+  display: flex;
+  flex-direction: column; 
+}
+
+.main-content {
+  flex: 1; 
+  background: #f6ded8; 
+  padding: 20px; 
 }
 a {
   cursor: pointer;
@@ -19,3 +33,4 @@ a {
   text-decoration: inherit;
   -webkit-tap-highlight-color: transparent;
 }
+

@@ -87,7 +87,12 @@ function MealsList({ limit }) {
 
   return (
     <>
-      <h2 style={{ textAlign: "center" }}>Meals</h2>
+    <div className="meals-list" >
+      <h2 style={{ textAlign: "center",
+        padding: "20px",
+        fontSize: "4em",
+        fontFamily: "'Dancing Script', cursive",
+       }}>Meals</h2>
 
       <div
         style={{
@@ -100,8 +105,9 @@ function MealsList({ limit }) {
         <select
           defaultValue=""
           onChange={(e) => handleSortChange("sortKey", e.target.value)}
+          className="sort-select"
         >
-          <option value="" disabled>
+          <option value="" disabled className="sort-select">
             Select Field to Sort
           </option>
           <option value="title">Sort by Name</option>
@@ -111,6 +117,7 @@ function MealsList({ limit }) {
         <select
           defaultValue=""
           onChange={(e) => handleSortChange("sortDir", e.target.value)}
+          className="sort-select"
         >
           <option value="" disabled>
             Select Direction
@@ -129,6 +136,7 @@ function MealsList({ limit }) {
           <p>Loading meals...</p>
         )}
       </div>
+    </div>
     </>
   );
 }

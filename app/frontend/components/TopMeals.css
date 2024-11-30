@@ -18,14 +18,14 @@
  
   .meals-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
     gap: 20px;
     padding: 20px;
   }
   
   
   .meal-card {
-    background-color: #fff;
+    background-color:;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -66,13 +66,13 @@
   
   .meal-spots {
     font-size: 1em;
-    color: #28a745;
+    color:#426c63;
     margin: 10px 0;
   }
   
   .meal-likes {
     margin-top: 10px;
-    color: #ff6f61;
+    color: #333;
     font-size: 1em;
     display: flex;
     justify-content: center;
@@ -82,8 +82,9 @@
 
   
   .discount-info {
-    background-color: #fffbcc;
-    border: 1px solid #f7e88e;
+  background-color: #f8e0df;
+ 
+    border: 1px solid ;
     padding: 15px;
     margin: 20px 0;
     border-radius: 8px;
@@ -96,6 +97,6 @@
   }
   
   .discount-info b {
-    color: #d9534f;
+    color: red;
   }
   
