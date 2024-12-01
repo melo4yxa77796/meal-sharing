@@ -40,7 +40,7 @@ const ReviewsPage = ({ mealId }) => {
         setTitle("");
         setDescription("");
         setStars(5);
-        setIsModalOpen(false); // Закрываем модальное окно после успешной отправки
+        setIsModalOpen(false); 
       } else {
         alert("Failed to submit review");
       }
@@ -63,7 +63,7 @@ const ReviewsPage = ({ mealId }) => {
         Leave a Review
       </Button>
 
-      {/* Модальное окно */}
+      
       <Modal open={isModalOpen} onClose={handleCloseModal}>
         <Box
           sx={{
