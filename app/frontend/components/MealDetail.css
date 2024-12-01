@@ -1,0 +1,86 @@
+/*.meal-detail-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.meal-info {
+  width: 45%;
+}
+
+.reviews-section {
+  width: 45%;
+}
+.meal-image {
+  width: 60%;
+  height: 30%;
+  margin: 0 auto;
+}*/
+/* meal-detail.css */
+.meal-detail {
+  max-width: 1200px;
+  margin: 40px auto; /* Центрирование */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для выделения карточки */
+}
+
+.meal-detail h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.meal-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 20px auto; /* Центрирование изображения */
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Лёгкая тень */
+}
+
+.meal-detail-container {
+  display: flex;
+  flex-wrap: wrap; /* Для адаптивности */
+  gap: 20px;
+}
+
+.meal-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.meal-info p {
+  margin: 10px 0;
+  color: #555;
+  line-height: 1.5;
+}
+
+.reservation-form {
+  margin-top: 20px;
+}
+
+.reservation-form .MuiTextField-root {
+  margin-bottom: 15px;
+}
+
+.reviews-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Респонсивность */
+@media (max-width: 768px) {
+  .meal-detail-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .meal-info,
+  .reviews-section {
+    min-width: 100%;
+  }
+}
+

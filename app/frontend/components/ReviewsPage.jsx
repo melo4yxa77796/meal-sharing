@@ -1,16 +1,15 @@
 
 
-
 import React, { useState } from "react";
-import { TextField, Button, Typography } from "@mui/material";
+import { TextField, Button, Typography, Box, Modal } from "@mui/material";
 import "./ReviewsPage.css";
 
-const ReviewsPage = ({ mealId }) => {  
+const ReviewsPage = ({ mealId }) => {
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [stars, setStars] = useState(5);
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const createdDate = new Date().toISOString().split("T")[0];
 
@@ -21,7 +20,7 @@ const ReviewsPage = ({ mealId }) => {
       name,
       title,
       description,
-      meal_id: mealId,  
+      meal_id: mealId,
       stars,
       created_date: createdDate,
     };
@@ -41,7 +40,7 @@ const ReviewsPage = ({ mealId }) => {
         setTitle("");
         setDescription("");
         setStars(5);
-        setIsFormVisible(false);
+        setIsModalOpen(false); 
       } else {
         alert("Failed to submit review");
       }
@@ -51,68 +50,99 @@ const ReviewsPage = ({ mealId }) => {
     }
   };
 
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
+
   return (
     <div className="reviews-page">
       <Typography variant="h4" gutterBottom>
-        Leave a Review
+        Reviews
       </Typography>
 
-      <Button
-        variant="outlined"
-        color="primary"
-        onClick={() => setIsFormVisible(!isFormVisible)}
-      >
-        {isFormVisible ? "Hide Form" : "Show Form"}
+      <Button variant="contained" color="primary" onClick={handleOpenModal}>
+        Leave a Review
       </Button>
 
-      {isFormVisible && (
-        <form onSubmit={handleSubmit} className="review-form">
-          <TextField
-            label="Your Name"
-            variant="outlined"
-            fullWidth
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            margin="normal"
-            required
-          />
-          <TextField
-            label="Review Title"
-            variant="outlined"
-            fullWidth
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            margin="normal"
-            required
-          />
-          <TextField
-            label="Your Review"
-            variant="outlined"
-            fullWidth
-            multiline
-            rows={4}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            margin="normal"
-            required
-          />
-          <TextField
-            label="Stars"
-            variant="outlined"
-            fullWidth
-            value={stars}
-            onChange={(e) => setStars(e.target.value)}
-            margin="normal"
-            type="number"
-            min="1"
-            max="5"
-            required
-          />
-          <Button variant="contained" color="primary" type="submit">
-            Submit Review
-          </Button>
-        </form>
-      )}
+      
+      <Modal open={isModalOpen} onClose={handleCloseModal}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "white",
+            boxShadow: 24,
+            padding: 4,
+            borderRadius: 2,
+            width: 400,
+          }}
+        >
+          <Typography variant="h6" gutterBottom>
+            Leave a Review
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
+            <TextField
+              label="Your Name"
+              variant="outlined"
+              fullWidth
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <TextField
+              label="Review Title"
+              variant="outlined"
+              fullWidth
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+            <TextField
+              label="Your Review"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+            <TextField
+              label="Stars"
+              variant="outlined"
+              fullWidth
+              value={stars}
+              onChange={(e) => setStars(e.target.value)}
+              type="number"
+              inputProps={{ min: 1, max: 5 }}
+              required
+            />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                mt: 2,
+              }}
+            >
+              <Button variant="contained" color="primary" type="submit">
+                Submit
+              </Button>
+              <Button variant="outlined" color="secondary" onClick={handleCloseModal}>
+                Cancel
+              </Button>
+            </Box>
+          </Box>
+        </Box>
+      </Modal>
     </div>
   );
 };

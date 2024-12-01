@@ -1,5 +1,13 @@
 .meals-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px; 
+  display: grid;
+padding: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  gap: 16px;
+}
+.meals-list {
+  background-color: #dce2e0;
+}
+.sort-select {
+  font-size: 18px;
+  border-radius: 8px;
 }

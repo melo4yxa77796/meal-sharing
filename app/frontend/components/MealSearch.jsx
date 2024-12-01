@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./MealSearch.css";
 
 function MealSearch({ meals, onFilter }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -11,14 +12,15 @@ function MealSearch({ meals, onFilter }) {
   };
 
   return (
-    <div>
+    <div className="search-container">
       <input
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search for a meal..."
+        className="search-input"
       />
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={handleSearch} className="search-button">Search</button>
     </div>
   );
 }

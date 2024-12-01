@@ -36,4 +36,4 @@ const resetOldReservations = async () => {
   }
 };
 
-cron.schedule("*/10 * * * * ", resetOldReservations);
+cron.schedule("*/3   * * * * ", resetOldReservations);
