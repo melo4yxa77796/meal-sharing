@@ -24,9 +24,9 @@
   }
   
   
-  .meal-card {
-    background-color:;
-    border-radius: 10px;
+  .meal-card1 {
+    background-color:#dce2e0;
+    border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     display: flex;
@@ -55,6 +55,7 @@
     font-size: 1em;
     color: #555;
     margin: 10px 0;
+    text-align:center;
   }
   
   .meal-price {

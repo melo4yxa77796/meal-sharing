@@ -1,12 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import TopMeals from "./TopMeals";
+import "./Contacts.css";
 
 const Contacts = () => {
   return (
     <div className="contacts">
-      <h1>Top 3 Meals This Month</h1>
-      <Link to="/">Home</Link>
+      <h1 className="contacts-title">Top 3 Meals This Month</h1>
+      
       <TopMeals />
     </div>
   );

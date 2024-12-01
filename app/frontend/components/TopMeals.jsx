@@ -38,7 +38,7 @@ const TopMeals = () => {
       <div className="meals-container">
         {Array.isArray(topMeals) && topMeals.length > 0 ? (
           topMeals.map((meal) => (
-            <div className="meal-card" key={meal.id}>
+            <div className="meal-card1" key={meal.id}>
               <Link to={`/meals/${meal.id}`}>
                 <img
                   className="meal-image"

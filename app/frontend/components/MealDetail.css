@@ -1,28 +1,11 @@
-/*.meal-detail-container {
-  display: flex;
-  justify-content: space-between;
-}
 
-.meal-info {
-  width: 45%;
-}
-
-.reviews-section {
-  width: 45%;
-}
-.meal-image {
-  width: 60%;
-  height: 30%;
-  margin: 0 auto;
-}*/
-/* meal-detail.css */
-.meal-detail {
+/*.meal-detail {
   max-width: 1200px;
-  margin: 40px auto; /* Центрирование */
+  margin: 40px auto; 
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для выделения карточки */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .meal-detail h1 {
@@ -36,14 +19,13 @@
   display: block;
   max-width: 100%;
   height: auto;
-  margin: 0 auto 20px auto; /* Центрирование изображения */
+  margin: 0 auto 20px auto; 
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Лёгкая тень */
-}
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
 
 .meal-detail-container {
   display: flex;
-  flex-wrap: wrap; /* Для адаптивности */
+  flex-wrap: wrap; 
   gap: 20px;
 }
 
@@ -71,7 +53,7 @@
   min-width: 300px;
 }
 
-/* Респонсивность */
+
 @media (max-width: 768px) {
   .meal-detail-container {
     flex-direction: column;
@@ -82,5 +64,5 @@
   .reviews-section {
     min-width: 100%;
   }
-}
+}*/
 

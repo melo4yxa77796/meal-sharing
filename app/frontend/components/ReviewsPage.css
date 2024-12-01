@@ -1,15 +1,8 @@
 .reviews-page {
-  margin: 20px;
-}
-
-.review-form {
+  background-color: #cb4343;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 600px;
-  margin-top: 20px;
-}
-
-button {
-  align-self: flex-start;
+  align-items: center;
+  padding: 20px;
 }
