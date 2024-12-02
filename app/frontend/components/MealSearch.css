@@ -5,6 +5,9 @@
     border-radius: 8px;
     border: 1px solid ;
 }
+.search-button:hover{
+    background-color: #f6ded8;
+    color: #262419;}
 .search-container{
     display: flex;
     justify-content: center;

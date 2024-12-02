@@ -101,6 +101,7 @@ const Meal = ({ meal }) => {
           onClick={handleLike}
           className="like-button"
           disabled={hasLiked}
+        
         >
           {hasLiked ? "Liked" : "Like"}
         </button>

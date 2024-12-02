@@ -46,7 +46,7 @@ const TopMeals = () => {
                   alt={meal.title}
                 />
                 <h3 className="meal-title">{meal.title}</h3>
-                <p className="meal-description">{meal.description}</p>
+                <p className="meal-description1">{meal.description}</p>
                 <p className="meal-price">
                   Price: ${Number(meal.price).toFixed(2)}
                 </p>
@@ -76,3 +76,4 @@ const TopMeals = () => {
 };
 
 export default TopMeals;
+

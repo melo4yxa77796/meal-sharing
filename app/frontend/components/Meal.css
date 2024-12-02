@@ -4,11 +4,11 @@
   box-sizing: border-box;
 }
 
-
 html,
 body,
 #root {
-  background-color: azure !important;}
+  background-color: azure !important;
+}
 
 .meal-card {
   text-decoration: none;
@@ -29,19 +29,21 @@ body,
 .meal-title {
   font-size: 1.5em;
   margin-bottom: 8px;
+  text-align: center;
 }
 
 .meal-description {
-  padding-top:20px ;
-  
+  padding-top: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+text-align: justify;
   font-size: 1em;
   color: #555;
-  text-align: justify;
 }
 
 .meal-price {
   font-weight: bold;
   color: #333;
+  text-align: center;
 }
 
 .meal-image {

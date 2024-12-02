@@ -51,7 +51,7 @@
     color: #333;
   }
   
-  .meal-description {
+  .meal-description1 {
     font-size: 1em;
     color: #555;
     margin: 10px 0;
@@ -69,6 +69,7 @@
     font-size: 1em;
     color:#426c63;
     margin: 10px 0;
+    text-align: center;
   }
   
   .meal-likes {
@@ -79,6 +80,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+
   }
 
   
@@ -100,4 +102,6 @@
   .discount-info b {
     color: red;
   }
+  
+
   

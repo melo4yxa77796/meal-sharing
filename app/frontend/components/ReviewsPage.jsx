@@ -206,21 +206,8 @@ const ReviewsPage = ({ mealId }) => {
 
   return (
     <div className="reviews-page">
-      {/* Заголовок */}
-      <Typography
-        variant="h4"
-        gutterBottom
-        sx={{
-          textAlign: "center",
-          marginBottom: "20px",
-          fontWeight: "bold",
-          color: "#333",
-        }}
-      >
-        Reviews
-      </Typography>
-
-      {/* Кнопка открытия модального окна */}
+      
+      
       <Box
         sx={{
           display: "flex",
@@ -245,7 +232,7 @@ const ReviewsPage = ({ mealId }) => {
         </Button>
       </Box>
 
-      {/* Модальное окно */}
+      
       <Modal open={isModalOpen} onClose={handleCloseModal}>
         <Box
           sx={{
