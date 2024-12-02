@@ -256,7 +256,7 @@ const ReviewsPage = ({ mealId }) => {
             sx={{
               textAlign: "center",
               fontWeight: "bold",
-              color: "#1976d2",
+              color: "black",
              
             }}
           >
@@ -319,11 +319,12 @@ const ReviewsPage = ({ mealId }) => {
                 variant="contained"
                 type="submit"
                 sx={{
-                  backgroundColor: "#1976d2",
+                  backgroundColor: "#8cc7b4",
                   color: "white",
+                  
                   "&:hover": {
-                    backgroundColor: "#115293",
-                    
+                    backgroundColor: "#f6ded8",
+                    color: "black",
                   },
                 }}
               >
@@ -333,6 +334,15 @@ const ReviewsPage = ({ mealId }) => {
                 variant="outlined"
                 color="secondary"
                 onClick={handleCloseModal}
+                sx={{
+                  backgroundColor: "#f6ded8",
+                  color: "black",
+                  border:"none",
+                  "&:hover": {
+                    backgroundColor: "#8cc7b4",
+                    color: "black",
+                  },
+                }}
               >
                 Cancel
               </Button>

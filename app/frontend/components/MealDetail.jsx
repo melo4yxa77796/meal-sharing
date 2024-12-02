@@ -180,7 +180,7 @@ const MealDetail = () => {
             <Typography variant="body1" color="textSecondary">
               Price: ${meal.price}
             </Typography>
-            <Typography variant="body1" sx={{color:"black"}}>
+            <Typography variant="body1" >
               Available Reservations: {meal.availableReservations}
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -228,7 +228,7 @@ const MealDetail = () => {
             width: 400,
           }}
         >
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom sx={{textAlign:"center",color:"black"}}>
             Make a Reservation
           </Typography>
           <Box
@@ -284,13 +284,26 @@ const MealDetail = () => {
             <Box
               sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}
             >
-              <Button variant="contained" color="primary" type="submit">
+              <Button variant="contained"  type="submit" sx={{backgroundColor: "#8cc7b4",
+                  color: "white",
+                  
+                  "&:hover": {
+                    backgroundColor: "#f6ded8",
+                    color: "black",
+                  },}}>
                 Submit
               </Button>
               <Button
                 variant="outlined"
-                color="secondary"
+                
                 onClick={handleCloseModal}
+                sx={{ backgroundColor: "#f6ded8",
+                  color: "black",
+                  border:"none",
+                  "&:hover": {
+                    backgroundColor: "#8cc7b4",
+                    color: "black",
+                  },}}
               >
                 Cancel
               </Button>
