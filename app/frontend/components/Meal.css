@@ -12,7 +12,8 @@ body,
 
 .meal-card {
   text-decoration: none;
-  background: inherit;
+  background: linear-gradient(to bottom, #0c2a27, #8cc7b4);
+
   border: 1px solid #262419;
   border-radius: 8px;
   padding: 12px;
@@ -37,7 +38,7 @@ body,
   font-family: Georgia, "Times New Roman", Times, serif;
 text-align: justify;
   font-size: 1em;
-  color: #555;
+  color:white;
 }
 
 .meal-price {
@@ -54,4 +55,8 @@ text-align: justify;
 }
 .view-all-meals-button {
   background-color: #f9b1ba;
+}
+.heart-emoji {
+  font-size: 1.25rem; 
+  color: #f9b1ba;
 }

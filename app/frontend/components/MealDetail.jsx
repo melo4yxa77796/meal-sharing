@@ -123,14 +123,16 @@ const MealDetail = () => {
     <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
       <Box
         sx={{
-          backgroundColor: "white",
+          backgroundColor: "#f9e9e5;",
           borderRadius: "8px",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
           padding: 3,
           width: "90%",
           maxWidth: "1200px",
-          maxHeight: "800px", // Ограничение высоты карточки
-          overflowY: "auto", // Вертикальный скролл, если содержимое переполняет
+          maxHeight: "800px", 
+          overflowY: "auto", 
+          marginBottom: "30px",
+          border: "1px solid",
         }}
       >
         <Box
@@ -155,6 +157,7 @@ const MealDetail = () => {
                 height: "400px",
                 borderRadius: "8px",
                 objectFit: "cover",
+                border: "1px solid ",
               }}
             />
           </Box>
@@ -168,7 +171,7 @@ const MealDetail = () => {
               gap: 3,
             }}
           >
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h4" gutterBottom sx={{fontFamily:"'Dancing Script', cursive"}}>
               {meal.title}
             </Typography>
             <Typography variant="body1" color="textSecondary">
@@ -177,19 +180,28 @@ const MealDetail = () => {
             <Typography variant="body1" color="textSecondary">
               Price: ${meal.price}
             </Typography>
-            <Typography variant="body1" color="textSecondary">
+            <Typography variant="body1" sx={{color:"black"}}>
               Available Reservations: {meal.availableReservations}
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               <Button
                 variant="contained"
-                color="primary"
+                
                 onClick={handleOpenModal}
+                sx={{
+                  backgroundColor: "#8cc7b4",
+                  border: "1px solid black",
+                "&:hover": {
+              backgroundColor: "#f6ded8",
+              color:"black",
+              border: "1px solid black",
+              
+            },}}
               >
                 Make a Reservation
               </Button>
 
-              <ReviewsPage mealId={id} />
+              <ReviewsPage mealId={id}  />
             </Box>
           </Box>
         </Box>

@@ -105,7 +105,8 @@ const Meal = ({ meal }) => {
         >
           {hasLiked ? "Liked" : "Like"}
         </button>
-        <span>{likes} ❤️</span>
+        <span className="likes-count">{likes}❤️
+        </span>
       </div>
     </div>
   );

@@ -219,12 +219,15 @@ const ReviewsPage = ({ mealId }) => {
           variant="contained"
           onClick={handleOpenModal}
           sx={{
-            backgroundColor: "#1976d2",
+            backgroundColor: "#8cc7b4",
             color: "white",
             fontSize: "16px",
             padding: "10px 20px",
+            border: "1px solid black",
             "&:hover": {
-              backgroundColor: "#115293",
+              backgroundColor: "#f6ded8",
+              color:"black",
+              border: "1px solid black"
             },
           }}
         >
@@ -254,6 +257,7 @@ const ReviewsPage = ({ mealId }) => {
               textAlign: "center",
               fontWeight: "bold",
               color: "#1976d2",
+             
             }}
           >
             Leave a Review
@@ -319,6 +323,7 @@ const ReviewsPage = ({ mealId }) => {
                   color: "white",
                   "&:hover": {
                     backgroundColor: "#115293",
+                    
                   },
                 }}
               >
