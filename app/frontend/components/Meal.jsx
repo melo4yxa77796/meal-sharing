@@ -94,14 +94,14 @@ const Meal = ({ meal }) => {
         <h3 className="meal-title">{meal.title}</h3>
         <p className="meal-description">{meal.description}</p>
         <p className="meal-price">Price: ${price.toFixed(2)}</p>
-        <p className="meal-spots" >Available Spots: {availableSpots}</p>
+        <p className="meal-spots"  >Available Spots: {availableSpots}</p>
       </Link>
       <div className="meal-likes">
         <button
           onClick={handleLike}
           className="like-button"
           disabled={hasLiked}
-        
+        sx={{ marginTop: "auto",}}
         >
           {hasLiked ? "Liked" : "Like"}
         </button>
@@ -113,3 +113,4 @@ const Meal = ({ meal }) => {
 };
 
 export default Meal;
+

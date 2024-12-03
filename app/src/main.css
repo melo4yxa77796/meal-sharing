@@ -12,9 +12,11 @@ body,
   padding: 0;
   background: linear-gradient(to right, #0c2a27, #8cc7b4);
   min-height: 100vh;
-  background-size: 100% 100vh; 
+  background-size:  100vh; 
   background-repeat: no-repeat;
   background-position: top;
+  background-size: cover; 
+  background-position: center;
 }
 
 body {
@@ -33,4 +35,28 @@ a {
   text-decoration: inherit;
   -webkit-tap-highlight-color: transparent;
 }
+@media (max-width: 768px) {
+  html,
+  body,
+  #root {
+    background-size:  100vh; 
+    background-position: top; 
+  }
 
+  .main-content {
+    padding: 15px; 
+  }
+}
+
+@media (max-width: 480px) {
+  html,
+  body,
+  #root {
+    background-size:  100vh; 
+    background-position: top; 
+  }
+
+  .main-content {
+    padding: 10px; 
+  }
+}

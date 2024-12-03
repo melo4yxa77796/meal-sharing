@@ -47,7 +47,7 @@ const TopMeals = () => {
                 />
                 <h3 className="meal-title">{meal.title}</h3>
                 <p className="meal-description1">{meal.description}</p>
-                <p className="meal-price">
+                <p className="meal-price" >
                   Price: ${Number(meal.price).toFixed(2)}
                 </p>
               </Link>

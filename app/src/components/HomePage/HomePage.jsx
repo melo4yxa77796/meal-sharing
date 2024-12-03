@@ -1,16 +1,14 @@
-import React, { useEffect, useState, useRef } from "react";
+
+
+import React, { useEffect, useState } from "react";
+import Slider from "react-slick";
 import "./HomePage.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import Meal from "../../../frontend/components/Meal";
 import { Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
-
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function HomePage() {
   const [meals, setMeals] = useState([]);
@@ -37,6 +35,34 @@ function HomePage() {
     fetchData();
   }, []);
 
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <div className="home-page">
       <header
@@ -49,14 +75,22 @@ function HomePage() {
         }}
       >
         <div className="text-column" style={{ flex: 1, marginRight: "20px" }}>
-          <Typography variant="h1" gutterBottom sx={{
-    fontSize: "5.5rem", 
-    fontFamily: "'Dancing Script', cursive",
-   
-  }}>
+          <Typography
+            variant="h1"
+            gutterBottom
+            sx={{
+              fontSize: "5.5rem",
+              fontFamily: "'Dancing Script', cursive",
+            }}
+          >
             Welcome to Meal-Sharing
           </Typography>
-          <Typography variant="h5" gutterBottom className="description" sx={{ fontSize: "1.35rem",}}>
+          <Typography
+            variant="h5"
+            gutterBottom
+            className="description"
+            sx={{ fontSize: "1.35rem" }}
+          >
             Discover delicious dishes from around the world! Enjoy exclusive
             discounts on your favorite meals and reserve a table at your
             preferred restaurant with ease. Experience the joy of enjoying
@@ -74,7 +108,7 @@ function HomePage() {
                   marginRight: "30px",
                   "&:hover": {
                     backgroundColor: "#8cc7b4",
-                    color:"white",
+                    color: "white",
                   },
                 }}
               >
@@ -92,7 +126,7 @@ function HomePage() {
                   width: "170px",
                   "&:hover": {
                     backgroundColor: "#8cc7b4",
-                    color:"white",
+                    color: "white",
                   },
                 }}
               >
@@ -119,64 +153,49 @@ function HomePage() {
       </header>
 
       <section className="meals-slider-section">
-        <h2 style={{ textAlign: "center", padding: "30px",fontSize: "3em", color: "#333",
-          fontFamily: "'Dancing Script', cursive",
-         }}>Popular Meals</h2>
-        <Swiper
-          modules={[Navigation, Pagination]}
-          navigation
-          pagination={{ clickable: true }}
-          spaceBetween={10}
-          slidesPerView={4}
-          breakpoints={{
-            640: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 4 },
-          }}
+        <h2
           style={{
+            textAlign: "center",
             padding: "30px",
+            fontSize: "3em",
+            color: "#333",
+            fontFamily: "'Dancing Script', cursive",
           }}
         >
-          {meals.slice(0, 8).map((meal) => (
-            <SwiperSlide
-              key={meal.id}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <div style={{ width: "250px" }}>
+          Popular Meals
+        </h2>
+        <div style={{ padding: "30px", 
+    }}>
+          <Slider {...sliderSettings}>
+            {meals.slice(0, 8).map((meal) => (
+              <div key={meal.id} >
                 <Meal meal={meal} />
               </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+            ))}
+          </Slider>
+        </div>
       </section>
       <section className="meals-section">
-        <Link to="/meals" >
-        
-  
-        <Box
-  sx={{
-    display: "grid",
-    gridTemplateRows: "1fr auto", 
-  }}
->
-  <Box />
-  <Box sx={{ textAlign: "center", padding: "30px" }}>
-    <Button
-      variant="contained"
-      sx={{
-        borderRadius: "10px",
-        padding: "10px 20px",
-      }}
-    >
-      View All Meals
-    </Button>
-  </Box>
-</Box>
-
-
+        <Link to="/meals">
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateRows: "1fr auto",
+            }}
+          >
+            <Box />
+            <Box sx={{ textAlign: "center", padding: "30px" }}>
+              <Button
+                variant="contained"
+                sx={{
+                  borderRadius: "10px",
+                  padding: "10px 20px",
+                }}
+              >
+                View All Meals
+              </Button>
+            </Box>
+          </Box>
         </Link>
       </section>
     </div>
@@ -184,3 +203,4 @@ function HomePage() {
 }
 
 export default HomePage;
+

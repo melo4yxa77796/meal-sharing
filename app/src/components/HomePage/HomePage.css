@@ -1,64 +1,22 @@
-.swiper-slide > div {
-  max-width: 300px;
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  box-sizing: border-box;
-  background: none;
-
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.swiper-slide img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 0;
-}
-
-.swiper {
-  padding-bottom: 30px;
-}
-
-.swiper-pagination .swiper-pagination-bullet {
-  background-color: black !important;
-  opacity: 1;
-  width: 15px;
-  height: 15px;
-}
-
-.swiper-pagination .swiper-pagination-bullet-active {
-  background-color:#8cc7b4 !important;
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-  color: black !important;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  color: #fcd1cf !important;
-  transform: scale(1.2);
-}
 
 .header {
   padding-top: 30px;
   color: white;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; 
 }
 
-.button-section {
-  padding: 25px;
+.text-column {
+  flex: 1;
+  margin-right: 20px;
+  text-align: left;
 }
-.description {
-  text-align: justify;
+
+.image-column {
+  flex: 1;
+  text-align: center;
 }
 
 .meals-slider-section {
@@ -68,16 +26,46 @@
 .meals-section {
   background-color: #dce2e0;
 }
+
 .meals-section button {
   background-color: #8cc7b4;
   color: white;
- 
 }
+
 .meals-section button:hover {
   background-color: #f6ded8;
   color: black;
 }
 
+.button-section {
+  padding: 25px;
+}
+
+.description {
+  text-align: justify;
+}
+
+
+@media (max-width: 1024px) {
+  .header {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .text-column {
+    text-align: center;
+    margin-right: 0;
+  }
+
+  .image-column {
+    margin-top: 20px;
+    order: -1; 
+  }
+
+  .meals-slider-section {
+    padding: 20px;
+  }
+}
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
@@ -91,5 +79,27 @@
 
   .image-column {
     margin-top: 20px;
+  }
+
+  .meals-slider-section h2 {
+    font-size: 2em;
+  }
+
+  .meals-slider-section {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 640px) {
+  .text-column h1 {
+    font-size: 2.5rem;
+  }
+
+  .description {
+    font-size: 1rem; 
+  }
+  .button-section button {
+    width: 100%;
+    margin: 10px 0;
   }
 }
