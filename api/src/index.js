@@ -35,7 +35,7 @@ app.get(
   "/",
   asyncHandler(async (req, res) => {
     res.json({ message: "API is working!" });
-  })
+  }),
 );
 
 app.get("/future-meals", async (req, res) => {

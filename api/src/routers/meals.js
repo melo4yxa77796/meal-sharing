@@ -89,7 +89,7 @@ mealsRouter.get("/top", async (req, res) => {
         this.on("Meal.id", "=", "Likes.meal_id").andOn(
           "Likes.created_at",
           ">",
-          knex.raw("DATE_SUB(NOW(), INTERVAL 1 MONTH)")
+          knex.raw("DATE_SUB(NOW(), INTERVAL 1 MONTH)"),
         );
       })
       .leftJoin("Reservation", "Meal.id", "Reservation.meal_id")
@@ -102,8 +102,8 @@ mealsRouter.get("/top", async (req, res) => {
         "Meal.max_reservations",
         knex.raw("COALESCE(COUNT(Likes.id), 0) as totalLikes"),
         knex.raw(
-          "Meal.max_reservations - COALESCE(SUM(Reservation.number_of_guests), 0) as availableSpots"
-        )
+          "Meal.max_reservations - COALESCE(SUM(Reservation.number_of_guests), 0) as availableSpots",
+        ),
       )
       .groupBy(
         "Meal.id",
@@ -111,7 +111,7 @@ mealsRouter.get("/top", async (req, res) => {
         "Meal.description",
         "Meal.price",
         "Meal.image_path",
-        "Meal.max_reservations"
+        "Meal.max_reservations",
       )
       .orderBy("totalLikes", "desc")
       .limit(3);
@@ -202,7 +202,7 @@ mealsRouter.put("/:id", async (req, res, next) => {
 
   if (!title || !when || !max_reservations || !price) {
     const error = new Error(
-      "Fields title, when, max_reservations, and price are required."
+      "Fields title, when, max_reservations, and price are required.",
     );
     error.status = 400;
     return next(error);

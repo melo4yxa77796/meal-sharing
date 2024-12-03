@@ -15,7 +15,7 @@ const resetOldReservations = async () => {
     const oldReservations = await knex("Reservation").where(
       "created_date",
       "<",
-      formattedDate
+      formattedDate,
     );
 
     console.log("Finded old reservations:", oldReservations);
