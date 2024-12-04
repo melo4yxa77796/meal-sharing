@@ -13,11 +13,10 @@ import { fileURLToPath } from "url";
 import fs from "fs/promises";
 
 const app = express();
-app.use(cors({
-  origin: "https://meal-sharing-front.onrender.com",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], 
-  credentials: true 
-}));
+app.use(cors(
+  "*"
+));
+
 app.use(bodyParser.json());
 
 const __filename = fileURLToPath(import.meta.url);
