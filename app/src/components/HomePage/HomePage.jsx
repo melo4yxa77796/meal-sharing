@@ -18,7 +18,7 @@ function HomePage() {
     // Fetch data from the API
     const fetchData = async () => {
       try {
-        const response = await fetch("${API_URL}/all-meals");
+        const response = await fetch(`${API_URL}/all-meals`);
         const data = await response.json();
 
         const sanitizedData = data.map((meal) => ({
