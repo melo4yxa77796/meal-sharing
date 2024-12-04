@@ -5,12 +5,12 @@ import "./TopMeals.css";
 const TopMeals = () => {
   const [topMeals, setTopMeals] = useState([]);
   const [error, setError] = useState(null);
-  const API_URL = import.meta.env.VITE_API_URL;
+  
 
   useEffect(() => {
     const fetchTopMeals = async () => {
       try {
-        const response = await fetch("${API_URL}/api/meals/top");
+        const response = await fetch("http://localhost:3001/api/meals/top");
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -43,7 +43,7 @@ const TopMeals = () => {
               <Link to={`/meals/${meal.id}`}>
                 <img
                   className="meal-image"
-                  src={`&{API_URL}${meal.image_path}`}
+                  src={`http://localhost:3001${meal.image_path}`}
                   alt={meal.title}
                 />
                 <h3 className="meal-title">{meal.title}</h3>

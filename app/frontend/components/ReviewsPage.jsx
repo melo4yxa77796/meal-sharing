@@ -11,7 +11,7 @@ const ReviewsPage = ({ mealId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const createdDate = new Date().toISOString().split("T")[0];
-  const API_URL = import.meta.env.VITE_API_URL;
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ const ReviewsPage = ({ mealId }) => {
     };
 
     try {
-      const response = await fetch("${API_URL}/api/reviews", {
+      const response = await fetch("http://localhost:3001/api/reviews", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

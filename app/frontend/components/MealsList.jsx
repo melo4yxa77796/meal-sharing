@@ -8,11 +8,11 @@ function MealsList({ limit }) {
   const [filteredMeals, setFilteredMeals] = useState([]);
   const [sortKey, setSortKey] = useState("");
   const [sortDir, setSortDir] = useState("");
-  const API_URL = import.meta.env.VITE_API_URL;
+  
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`${API_URL}/all-meals`);
+      const response = await fetch(`http://localhost:3001/all-meals`);
       const data = await response.json();
 
       const sanitizedData = data.map((meal) => ({
@@ -30,7 +30,7 @@ function MealsList({ limit }) {
 
   const updateAvailableSpots = async () => {
     try {
-      const response = await fetch("${API_URL}/api/meals");
+      const response = await fetch("http://localhost:3001/api/meals");
       const updatedMeals = await response.json();
 
       setMeals((prevMeals) =>
