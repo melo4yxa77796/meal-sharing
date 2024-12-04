@@ -12,12 +12,13 @@ import "slick-carousel/slick/slick-theme.css";
 
 function HomePage() {
   const [meals, setMeals] = useState([]);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // Fetch data from the API
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/all-meals");
+        const response = await fetch("${API_URL}/all-meals");
         const data = await response.json();
 
         const sanitizedData = data.map((meal) => ({

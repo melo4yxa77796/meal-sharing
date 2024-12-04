@@ -13,9 +13,10 @@ import { fileURLToPath } from "url";
 import fs from "fs/promises";
 
 const app = express();
-app.use(cors(
-  "*"
-));
+app.use(cors({
+  origin: 'https://your-frontend.onrender.com', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
 
 
 

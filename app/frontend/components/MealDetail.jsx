@@ -16,10 +16,11 @@ const MealDetail = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const fetchMeal = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/meals/${id}`);
+      const response = await fetch(`${API_URL}/api/meals/${id}`);
       if (response.ok) {
         const data = await response.json();
         setMeal({
@@ -61,7 +62,7 @@ const MealDetail = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/api/reservations", {
+      const response = await fetch(`${API_URL}/api/reservations`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -150,7 +151,7 @@ const MealDetail = () => {
           >
             <Box
               component="img"
-              src={`http://localhost:3001${meal.image_path}`}
+              src={`${API_URL}${meal.image_path}`}
               alt={meal.title}
               sx={{
                 width: "100%",

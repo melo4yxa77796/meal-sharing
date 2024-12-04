@@ -11,10 +11,12 @@ const Meal = ({ meal }) => {
   const price =
     typeof meal.price === "string" ? parseFloat(meal.price) : meal.price;
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
   const fetchAvailableSpots = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/meals/${meal.id}/spots`
+       `${API_URL}/api/meals/${meal.id}/spots`
       );
       if (response.ok) {
         const data = await response.json();
@@ -30,7 +32,7 @@ const Meal = ({ meal }) => {
   const fetchLikes = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/meals/${meal.id}/likes`
+        `${API_URL}/api/meals/${meal.id}/likes`
       );
       if (response.ok) {
         const data = await response.json();
@@ -51,7 +53,7 @@ const Meal = ({ meal }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:3001/api/meals/${meal.id}/like`,
+        `${API_URL}/api/meals/${meal.id}/like`,
         {
           method: "POST",
           headers: {
@@ -86,7 +88,7 @@ const Meal = ({ meal }) => {
       <Link to={`/meals/${meal.id}`}>
         {meal.image_path && (
           <img
-            src={`http://localhost:3001${meal.image_path}`}
+            src={`${API_URL}${meal.image_path}`}
             alt={meal.title}
             className="meal-image"
           />
