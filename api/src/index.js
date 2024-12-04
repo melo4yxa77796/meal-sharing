@@ -14,7 +14,7 @@ import fs from "fs/promises";
 
 const app = express();
 app.use(cors({
-  origin: 'https://your-frontend.onrender.com', 
+  origin: 'https://meal-sharing-front.onrender.com', 
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
