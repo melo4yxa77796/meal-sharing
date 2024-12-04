@@ -155,6 +155,7 @@ function MealsList({ limit }) {
 
   // URL вашего бэкенда
   const apiUrl = "https://meal-sharing-9cn2.onrender.com";
+  
 
   const fetchData = async () => {
     try {
