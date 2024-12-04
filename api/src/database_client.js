@@ -15,5 +15,3 @@ const connection = knex({
 
 export default connection;
 
-
-
