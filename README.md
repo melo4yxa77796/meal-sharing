@@ -1,7 +1,7 @@
 Very velcome to my project meal-sharing.
 
 This project includes four pages where you can vote for meals, get discounts on food, view prices, check available spots, and sort the items plus filter.
-![page about](https://github.com/melo4yxa77796/meal-sharing/blob/main/Screenshot%202024-12-04%20at%2015.08.04.png)
+![page about](https://github.com/melo4yxa77796/meal-sharing/blob/main/Screenshot%202024-12-04%20at%2015.31.54.png)
 
 - `api` which is a NodeJS project using Express for the API
 - `app` which is Vite project using React for the web app
