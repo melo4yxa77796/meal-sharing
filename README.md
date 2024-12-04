@@ -1,30 +1,16 @@
-<img src="./images/hyf.svg" alt="image" width="200px" height="200px">
-
-# HackYourFuture project template
-
-This template is meant to be used as part of the meal-sharing and Final Project modules,
-but can work as a starting point for any full stack project.
-
-It consists of two packages:
+Very welcome to my meal-sharing project
+![page about](https://github.com/melo4yxa77796/meal-sharing/blob/main/Screenshot%202024-12-04%20at%2015.08.04.png)
 
 - `api` which is a NodeJS project using Express for the API
 - `app` which is Vite project using React for the web app
 
-Both packages are as small as possible but feel free to add more tools as you see fit.
 
-## Prerequisites
 
-This template assumes that there is a database already set up with tables and data.
 
-You can start a MySQL instance using Docker with the below command:  
-`docker run --name mysql -e MYSQL_ROOT_PASSWORD=mysql-root-password -e MYSQL_DATABASE=my-database -d -p 3306:3306 mysql:latest`
-
-Then connect to this instance using any database management tool you prefer, such as MySQL Workbench, to set up your tables and add data.
-![Testing your database](./images/db_test.png)
 
 ## Getting started
 
-> Before you start, make sure no other projects are running, in order to have the ports free.
+git clone https://github.com/melo4yxa77796/meal-sharing.git
 
 To get started you'll need two terminals.
 
@@ -50,39 +36,13 @@ npm run dev
 
 You can then open the web app at [http://localhost:3000](http://localhost:3000).
 ![Testing the app with a browser](./images/app_test.png)
+![second part page about](https://github.com/melo4yxa77796/meal-sharing/blob/main/Screenshot%202024-12-04%20at%2015.32.07.png)
 
-## Common issues
 
-### Port conflict
 
-If you see the below error when trying to start either the API or the web app, then you have a port conflict.  
-Some other process is already listening on the port you want to use. Either stop that process or use another port by changing the PORT variable in the `.env` file for the package that is facing the conflict (API or web app).
 
-```
-node:events:496
-      throw er; // Unhandled 'error' event
-      ^
 
-Error: listen EADDRINUSE: address already in use :::3001
-    at Server.setupListenHandle [as _listen2] (node:net:1897:16)
-    at listenInCluster (node:net:1945:12)
-    at Server.listen (node:net:2037:7)
-    at Function.listen (/Users/hyf/dev/hyf/hyf-project-template/api/node_modules/express/lib/application.js:635:24)
-    at file:///Users/hyf/dev/hyf/hyf-project-template/api/src/index.js:29:5
-    at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:323:24)
-    at async loadESM (node:internal/process/esm_loader:28:7)
-    at async handleMainPromise (node:internal/modules/run_main:113:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1924:8)
-    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
-  code: 'EADDRINUSE',
-  errno: -48,
-  syscall: 'listen',
-  address: '::',
-  port: 3001
-}
-```
+ 
 
 ### Wrong database credentials
 
