@@ -23,8 +23,7 @@ npm install
 npm run dev
 ```
 
-You can then test the API using [Postman](https://www.postman.com/) at [http://localhost:3001/api](http://localhost:3001/api).
-![Testing the API with Postman](./images/api_test.png)
+
 
 In the second terminal run the following commands:
 
@@ -41,12 +40,12 @@ npm run dev
 
 
 
- 
+ ![](https://github.com/melo4yxa77796/meal-sharing/blob/main/Screenshot%202024-12-04%20at%2015.33.11.png)
 
 
-  
+  ![](https://github.com/melo4yxa77796/meal-sharing/blob/main/Screenshot%202024-12-04%20at%2015.33.37.png)
 
-
+![](https://github.com/melo4yxa77796/meal-sharing/blob/main/Screenshot%202024-12-04%20at%2015.32.44.png)
 
 
 
